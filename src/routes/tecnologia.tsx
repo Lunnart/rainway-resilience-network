@@ -35,7 +35,7 @@ const limites = [
 
 function Tecnologia() {
   const [sel, setSel] = useState(0);
-  const c = camadas[sel];
+  const c = camadas[sel]!;
   return (
     <div className="space-y-8">
       <header>
