@@ -22,7 +22,7 @@ const kpis = [
 
 const fases = [
   ["Concepção e pesquisa de anterioridade", "concluída"],
-  ["Modelagem conceitual e simuladores", "em andamento"],
+  ["Modelagem conceitual e simuladores", "concluída"],
   ["Estudo geotécnico e hidrológico local", "pendente"],
   ["Protótipo em escala reduzida", "pendente"],
   ["Piloto em via de Fortaleza", "pendente"],

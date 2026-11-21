@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SimNotice } from "@/components/SiteShell";
 import { calcRain } from "@/lib/hydro";
@@ -38,6 +38,8 @@ function Sim() {
   const [bairro, setBairro] = useState<string | null>(null);
   const r = calcRain({ areaM2: area, precipitacaoMm: mm, coeficiente: Math.min(c, 1), eficiencia: Math.min(ef, 100) / 100, reservatorioL: res });
   const pct = Math.min(100, r.ocupacao * 100);
+  const b = bairros.find((x) => x.id === bairro);
+  const comp = chuvas.map((ch) => ({ ch, r: calcRain({ areaM2: area, precipitacaoMm: ch.mm, coeficiente: Math.min(c, 1), eficiencia: Math.min(ef, 100) / 100, reservatorioL: res }) }));
   return (
     <div className="space-y-8">
       <header>
@@ -98,9 +100,37 @@ function Sim() {
           <p className="rounded bg-muted p-3 font-mono text-xs text-muted-foreground">
             V = A × P · Vcapt = V × C × η · Excedente = máx(0, Vcapt − Cap.)
           </p>
+          {b && (
+            <Link to="/infraestrutura" search={{ modelo: b.modelo }} className="block rounded border border-primary bg-card p-3 text-sm hover:bg-secondary">
+              Trecho de <b>{b.nome}</b>: ver Modelo {b.modelo} de infraestrutura sugerido →
+            </Link>
+          )}
           <SimNotice>Estimativas preliminares. Não substituem projetos hidrológicos executivos (curvas IDF, tempo de concentração, perdas iniciais etc.).</SimNotice>
         </div>
       </div>
+      <section className="space-y-3 rounded border border-border bg-card p-6">
+        <h2 className="text-xl font-extrabold">Comparação entre cenários de chuva</h2>
+        <p className="text-sm text-muted-foreground">Mesma área, coeficiente, eficiência e reservatório; muda só a chuva.</p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="font-mono text-[10px] uppercase text-muted-foreground">
+              <tr className="text-left"><th className="py-2">Cenário</th><th>Chuva</th><th>Captável</th><th>Armazenado</th><th>Excedente</th><th>Reservatório p/ reter tudo</th></tr>
+            </thead>
+            <tbody>
+              {comp.map(({ ch, r: x }) => (
+                <tr key={ch.id} className="border-t border-border">
+                  <td className="py-2 font-semibold">{ch.nome}</td>
+                  <td className="font-mono">{ch.mm} mm</td>
+                  <td className="font-mono">{fmt(x.captavelL)} L</td>
+                  <td className="font-mono">{fmt(x.armazenadoL)} L</td>
+                  <td className={`font-mono ${x.excedenteL > 0 ? "font-semibold text-destructive" : ""}`}>{fmt(x.excedenteL)} L</td>
+                  <td className="font-mono">{fmt(x.captavelL / 1000, 1)} m³</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }

@@ -11,6 +11,8 @@ export const Route = createFileRoute("/infraestrutura")({
       { property: "og:description", content: "Diferenças construtivas, vantagens e limitações por tipo de via." },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { modelo?: "A" | "B" | "C" } =>
+    s["modelo"] === "A" || s["modelo"] === "B" || s["modelo"] === "C" ? { modelo: s["modelo"] } : {},
   component: Infra,
 });
 
@@ -44,7 +46,8 @@ const modelos = {
 type K = keyof typeof modelos;
 
 function Infra() {
-  const [k, setK] = useState<K>("A");
+  const { modelo } = Route.useSearch();
+  const [k, setK] = useState<K>(modelo ?? "A");
   const m = modelos[k];
   return (
     <div className="space-y-8">
