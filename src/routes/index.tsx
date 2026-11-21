@@ -23,7 +23,7 @@ const kpis = [
 const fases = [
   ["Concepção e pesquisa de anterioridade", "concluída"],
   ["Modelagem conceitual e simuladores", "concluída"],
-  ["Estudo geotécnico e hidrológico local", "pendente"],
+  ["Estudo geotécnico e hidrológico local", "em andamento"],
   ["Protótipo em escala reduzida", "pendente"],
   ["Piloto em via de Fortaleza", "pendente"],
 ];
@@ -32,6 +32,7 @@ const modulos = [
   { to: "/tecnologia", t: "B · Funcionamento", d: "Camadas, materiais e limitações." },
   { to: "/simulador-chuva", t: "C · Simulador de águas pluviais", d: "Volume captável e excedente." },
   { to: "/infraestrutura", t: "D · Simulador de infraestrutura", d: "Modelos A, B e C de via." },
+  { to: "/estudo-local", t: "Estudo geotécnico e hidrológico", d: "Chuva, solo e alagamentos com fontes reais." },
 ] as const;
 
 function Index() {
