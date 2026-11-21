@@ -19,9 +19,9 @@ A ideia é desenvolver uma estrutura que permita:
 - Destinar a água armazenada a usos não potáveis, como irrigação e limpeza urbana.
 - Encaminhar o excesso de água para sistemas convencionais de drenagem.
 
-### Onde está a inovação?
+### Inovação:
 
-O diferencial do SADRE 2.0 está em reunir soluções que normalmente são utilizadas separadamente.
+Nosso diferencial está em reunir soluções que normalmente são utilizadas separadamente.
 
 A proposta é transformar a infraestrutura das ruas em uma estrutura multifuncional, que não apenas permita a circulação de veículos, mas também contribua para a gestão da água da chuva.
 
