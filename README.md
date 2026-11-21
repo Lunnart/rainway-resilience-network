@@ -1,97 +1,60 @@
-# Rainway Resilience Network
+## SADRE 2.0 — Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas de Fortaleza-Ce.
 
-PROMPT MESTRE — SADRE 2.0
+**Uma proposta de inovação para enfrentar os desafios da drenagem urbana e do reaproveitamento da água da chuva.**
 
-Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
+### Sobre o projeto
 
-1. PAPEL E ESPECIALIZAÇÃO
+Em períodos chuvosos, diversas regiões de Fortaleza enfrentam alagamentos, dificuldades de mobilidade e danos à infraestrutura das ruas. Além dos transtornos para a população, esse cenário evidencia a necessidade de buscar alternativas mais sustentáveis para a gestão da água nas cidades.
 
-Atue como uma equipe multidisciplinar especializada em:
-- Engenharia Civil e Pavimentação.
-- Engenharia Ambiental e Sanitária.
-- Hidrologia e Drenagem Urbana.
-- Infraestrutura Verde e Economia Circular.
-- IoT e Sistemas Inteligentes.
-- Desenvolvimento de software e arquitetura de sistemas.
-- Inovação tecnológica e pesquisa de anterioridade.
+Foi pensando nisso que surgiu o SADRE 2.0: uma proposta de sistema que busca integrar drenagem urbana, filtragem, armazenamento e reaproveitamento da água da chuva em uma mesma estrutura.
 
-Seu objetivo é desenvolver uma plataforma digital para estruturar, documentar, simular conceitualmente e apresentar o projeto SADRE 2.0, destinado inicialmente à cidade de Fortaleza, Ceará, Brasil.
+### Como a proposta funciona?
 
-2. CONTEXTO DO PROJETO
+A ideia é desenvolver uma estrutura que permita:
 
-Fortaleza enfrenta problemas recorrentes durante períodos chuvosos:
-- Alagamentos em vias públicas.
-- Interrupções no trânsito.
-- Danos ao pavimento e formação de buracos.
-- Sobrecarga da infraestrutura de drenagem.
-- Desperdício de água pluvial.
-- Custos recorrentes de manutenção urbana.
+- Captar parte da água da chuva por meio de pavimentação drenante.
+- Reter resíduos e sedimentos através de filtros.
+- Armazenar a água em reservatórios subterrâneos.
+- Monitorar o funcionamento por meio de sensores.
+- Destinar a água armazenada a usos não potáveis, como irrigação e limpeza urbana.
+- Encaminhar o excesso de água para sistemas convencionais de drenagem.
 
-O projeto pretende desenvolver uma solução integrada inspirada em tecnologias como pavimentos permeáveis, asfalto poroso, reservatórios subterrâneos, filtragem de águas pluviais e sistemas inteligentes de monitoramento.
+### Onde está a inovação?
 
-O Parque Rio Branco, em Fortaleza, deve ser utilizado como referência local de infraestrutura permeável, sem afirmar que possui todas as funcionalidades propostas pelo SADRE.
+O diferencial do SADRE 2.0 está em reunir soluções que normalmente são utilizadas separadamente.
 
-3. OBJETIVO PRINCIPAL
+A proposta é transformar a infraestrutura das ruas em uma estrutura multifuncional, que não apenas permita a circulação de veículos, mas também contribua para a gestão da água da chuva.
 
-Construir uma plataforma web moderna, responsiva, econômica e funcional para apresentar e desenvolver o SADRE 2.0.
+Entre os recursos que estão sendo estudados estão a pavimentação drenante, reservatórios modulares, sensores inteligentes, monitoramento e utilização de materiais reciclados tecnicamente adequados.
 
-A plataforma deve demonstrar como integrar:
-1. Pavimentação drenante com proteção estrutural.
-2. Captação de águas pluviais.
-3. Filtragem e tratamento modular.
-4. Armazenamento subterrâneo.
-5. Reaproveitamento de água não potável.
-6. Monitoramento inteligente com sensores.
-7. Controle do excedente de água e conexão com a drenagem convencional.
+### Benefícios esperados
 
-IMPORTANTE: Não apresentar a tecnologia como invenção inédita comprovada. Diferenciar tecnologias existentes, adaptações propostas e inovações ainda em fase de pesquisa.
+Caso seja tecnicamente validado, o sistema poderá contribuir para:
 
-4. FUNCIONALIDADES DA PLATAFORMA
+- Reduzir o escoamento superficial da água da chuva.
+- Aproveitar água pluvial para atividades não potáveis.
+- Apoiar a conservação de áreas verdes.
+- Incentivar o uso de materiais reciclados.
+- Melhorar o planejamento da drenagem urbana.
 
-MÓDULO A — Painel principal
-Criar dashboard contendo:
-- Nome e identidade visual SADRE 2.0.
-- Apresentação resumida do projeto.
-- Problema urbano que pretende solucionar.
-- Objetivos ambientais e econômicos.
-- Indicadores demonstrativos (com alertas de dados simulados).
-- Situação atual de desenvolvimento.
-- Acesso rápido aos demais módulos.
-Utilizar dados demonstrativos claramente identificados como simulações, nunca como resultados reais.
+### Etapa atual do projeto
 
-MÓDULO B — Funcionamento da tecnologia
-Criar uma representação visual interativa das camadas:
-1. Superfície drenante.
-2. Camada filtrante.
-3. Camada estrutural.
-4. Reservatório subterrâneo.
-5. Sistema de tratamento.
-6. Sensores e tubulações.
-7. Reaproveitamento e drenagem de segurança.
-Apresentar a função de cada camada e os materiais tecnicamente possíveis.
-Incluir alertas sobre limitações de infiltração, contaminação, lençol freático, tráfego pesado e manutenção periódica.
+O SADRE 2.0 é uma proposta de inovação em desenvolvimento. Ainda não é uma tecnologia implantada ou com resultados comprovados em campo.
 
-MÓDULO C — Simulador de águas pluviais
-Desenvolver uma calculadora funcional com os seguintes campos:
-- Área de captação em m².
-- Precipitação em milímetros.
-- Coeficiente de escoamento (C).
-- Eficiência estimada de captação.
-- Capacidade do reservatório em litros.
+Os próximos passos envolvem estudos hidrológicos, avaliação dos materiais, simulações, desenvolvimento de um protótipo e testes experimentais para verificar sua viabilidade técnica, ambiental e econômica.
 
-Calcular:
-- Volume de chuva = área × precipitação (m³ e litros).
-- Volume captável = volume de chuva × coeficiente de escoamento × eficiência de captação.
-- Comparar volume captável com capacidade disponível do reservatório e apresentar o balanço e excedente para drenagem pública.
-- Informar que os cálculos são estimativas preliminares e não substituem projetos hidrológicos executivos.
+Também será necessário considerar fatores como resistência do pavimento, características do solo, qualidade da água, manutenção dos filtros e segurança durante chuvas intensas.
 
-MÓDULO D — Simulador de infraestrutura
-Permitir selecionar três modelos:
-- Modelo A: ruas residenciais e coletoras com alagamentos recorrentes.
-- Modelo B: ruas com canteiros centrais ou espaços laterais disponíveis.
-- Modelo C: grandes avenidas e vias de tráfego intenso.
-Apresentar diferenças construtivas, vantagens, limitações, estimativas conceituais e aplicações recomendadas.
-Não declarar nenhum modelo como solução única ou universal.
+### Visão de futuro
+
+Nosso objetivo é contribuir para cidades mais preparadas para os desafios climáticos, buscando transformar um problema recorrente, como o excesso de água nas ruas, em uma oportunidade para desenvolver soluções sustentáveis.
+
+**Projeto:** Rainway Resilience Network  
+**Sistema:** SADRE 2.0  
+**Área:** Drenagem urbana, engenharia sustentável, infraestrutura verde e economia circular.  
+**Aplicação inicial proposta:** Pontos críticos da cidade de Fortaleza – Ceará – Brasil.
+
+*Mais do que pensar em ruas que suportem a chuva, a proposta é estudar como elas podem participar de uma gestão mais inteligente da água.*
 
 This project was built with [Lovable](https://lovable.dev).
 
