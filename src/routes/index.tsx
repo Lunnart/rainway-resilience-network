@@ -41,7 +41,7 @@ function Index() {
       <section className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
-          <h1 className="mt-2 text-center 4xl font-extrabold leading-tight md:text-center 6xl">
+          <h1 className="mt-2 text-justify 4xl font-extrabold leading-tight md:text-center 6xl">
                     
             Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
           </h1>
