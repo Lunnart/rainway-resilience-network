@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SimNotice } from "@/components/SiteShell";
 import { calcRain } from "@/lib/hydro";
+import { chuvas, bairros } from "@/lib/fortaleza";
 
 export const Route = createFileRoute("/simulador-chuva")({
   head: () => ({
@@ -34,6 +35,7 @@ function Sim() {
   const [c, setC] = useState(0.85);
   const [ef, setEf] = useState(70);
   const [res, setRes] = useState(50000);
+  const [bairro, setBairro] = useState<string | null>(null);
   const r = calcRain({ areaM2: area, precipitacaoMm: mm, coeficiente: Math.min(c, 1), eficiencia: Math.min(ef, 100) / 100, reservatorioL: res });
   const pct = Math.min(100, r.ocupacao * 100);
   return (
@@ -42,6 +44,36 @@ function Sim() {
         <p className="font-mono text-xs uppercase text-primary">Módulo C</p>
         <h1 className="text-4xl font-extrabold">Simulador de águas pluviais</h1>
       </header>
+      <section className="space-y-4 rounded border border-border bg-card p-6">
+        <h2 className="text-xl font-extrabold">Cenários de Fortaleza</h2>
+        <div>
+          <p className="mb-2 font-mono text-xs uppercase text-muted-foreground">1 · Intensidade da chuva</p>
+          <div className="flex flex-wrap gap-2">
+            {chuvas.map((ch) => (
+              <button key={ch.id} type="button" title={ch.nota} onClick={() => setMm(ch.mm)}
+                className={`rounded border px-3 py-2 text-left text-sm ${mm === ch.mm ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-primary"}`}>
+                <span className="block font-semibold">{ch.nome}</span>
+                <span className="font-mono text-xs">{ch.mm} mm</span>
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">{chuvas.find((ch) => ch.mm === mm)?.nota ?? "Valor personalizado."}</p>
+        </div>
+        <div>
+          <p className="mb-2 font-mono text-xs uppercase text-muted-foreground">2 · Bairro com histórico de alagamento</p>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {bairros.map((b) => (
+              <button key={b.id} type="button" onClick={() => { setBairro(b.id); setArea(b.areaM2); setC(b.c); }}
+                className={`rounded border p-3 text-left text-sm ${bairro === b.id ? "border-primary bg-secondary" : "border-border hover:border-primary"}`}>
+                <span className="block font-semibold">{b.nome}</span>
+                <span className="block text-xs text-muted-foreground">{b.via}</span>
+                <span className="font-mono text-xs">{b.areaM2.toLocaleString("pt-BR")} m² · C {b.c} · Modelo {b.modelo}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <SimNotice>Cenários ilustrativos. Alturas de chuva e trechos são aproximações para estudo; confirme com dados da FUNCEME e da Defesa Civil de Fortaleza.</SimNotice>
+      </section>
       <div className="grid gap-6 md:grid-cols-[1fr_1.3fr]">
         <div className="space-y-4 rounded border border-border bg-card p-6">
           <Field label="Área de captação (m²)" value={area} onChange={setArea} />
