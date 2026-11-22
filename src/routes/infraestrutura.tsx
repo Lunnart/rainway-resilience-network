@@ -9,6 +9,8 @@ export const Route = createFileRoute("/infraestrutura")({
       { name: "description", content: "Compare os modelos A, B e C do SADRE 2.0 para diferentes tipos de via em Fortaleza." },
       { property: "og:title", content: "Simulador de infraestrutura — SADRE 2.0" },
       { property: "og:description", content: "Diferenças construtivas, vantagens e limitações por tipo de via." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   validateSearch: (s: Record<string, unknown>): { modelo?: "A" | "B" | "C" } =>

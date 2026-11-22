@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SimNotice } from "@/components/SiteShell";
+import { localStudyStatus } from "@/lib/local-study";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -8,6 +9,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Drenagem, reaproveitamento de água pluvial e estabilização de ruas em Fortaleza: visão geral do SADRE 2.0." },
       { property: "og:title", content: "SADRE 2.0 — Painel do projeto" },
       { property: "og:description", content: "Visão geral, objetivos e indicadores demonstrativos do SADRE 2.0." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,
@@ -23,7 +26,7 @@ const kpis = [
 const fases = [
   ["Concepção e pesquisa de anterioridade", "concluída"],
   ["Modelagem conceitual e simuladores", "concluída"],
-  ["Estudo geotécnico e hidrológico local", "em andamento"],
+  ["Estudo geotécnico e hidrológico local", localStudyStatus.fieldComplete ? "concluída" : localStudyStatus.documentaryComplete ? "documentação concluída · campo pendente" : "em andamento"],
   ["Protótipo em escala reduzida", "pendente"],
   ["Piloto em via de Fortaleza", "pendente"],
 ];
@@ -100,7 +103,7 @@ function Index() {
             {fases.map(([f, s], i) => (
               <li key={f} className="flex items-center justify-between gap-2 rounded bg-muted px-3 py-2 text-sm">
                 <span><span className="font-mono text-primary">{i + 1}.</span> {f}</span>
-                <span className={`font-mono text-[10px] uppercase ${s === "pendente" ? "text-muted-foreground" : "font-semibold text-primary"}`}>{s}</span>
+                <span className={`max-w-[45%] shrink-0 text-right font-mono text-[10px] uppercase ${s === "pendente" ? "text-muted-foreground" : "font-semibold text-primary"}`}>{s}</span>
               </li>
             ))}
           </ol>

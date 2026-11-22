@@ -11,6 +11,8 @@ export const Route = createFileRoute("/simulador-chuva")({
       { name: "description", content: "Calcule volume de chuva, volume captável e excedente para drenagem pública." },
       { property: "og:title", content: "Simulador de águas pluviais — SADRE 2.0" },
       { property: "og:description", content: "Estimativa preliminar de captação e armazenamento de água da chuva." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Sim,

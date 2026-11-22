@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep the documentary and field-study completion states separate in `src/lib/local-study.ts`; published regional references cannot certify site investigations.
+- Keep the published IDF equation in a browser-safe pure function with table-based tests; do not extrapolate outside the report's tabulated range.

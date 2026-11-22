@@ -9,6 +9,8 @@ export const Route = createFileRoute("/tecnologia")({
       { name: "description", content: "Camadas do SADRE 2.0: superfície drenante, filtragem, estrutura, reservatório, tratamento e sensores." },
       { property: "og:title", content: "Funcionamento das camadas — SADRE 2.0" },
       { property: "og:description", content: "Representação interativa das camadas e materiais do SADRE 2.0." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Tecnologia,
