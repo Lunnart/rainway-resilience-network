@@ -44,9 +44,9 @@ function Index() {
       <section className="grid gap-8">
         <div>
           <p className="text-center font-mono text-xs uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
-          <div className="mt-3 border-4 border-accent bg-asphalt px-5 py-8 text-center text-asphalt-foreground">
+          <div className="mt-3 -mx-4 border-4 border-accent bg-asphalt px-5 py-8 text-center text-asphalt-foreground">
             <p className="font-mono text-xs uppercase tracking-widest text-accent">SADRE 2.0</p>
-            <h1 className="mx-auto mt-2 max-w-4xl font-display text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
+            <h1 className="mx-auto mt-2 max-w-5xl font-display text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
               Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
             </h1>
           </div>
