@@ -44,10 +44,12 @@ function Index() {
       <section className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
-          <h1 className="mt-2 text-justify 4xl font-extrabold leading-tight md:text-justify 6xl">
-                    
-            Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
-          </h1>
+          <div className="mt-3 border-l-8 border-accent bg-asphalt px-5 py-6 text-asphalt-foreground">
+            <p className="font-mono text-xs uppercase tracking-widest text-accent">SADRE 2.0</p>
+            <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
+              Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
+            </h1>
+          </div>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
             Uma proposta integrada que combina pavimento drenante, filtragem modular, reservatório
             subterrâneo e monitoramento por sensores — para transformar a chuva de problema em recurso.
