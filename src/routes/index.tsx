@@ -43,7 +43,7 @@ function Index() {
     <div className="space-y-12">
       <section className="grid gap-8">
         <div>
-          <p className="-mt-6 text-center font-mono text-xs font-bold uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
+          <p className="-mt-6 border-y-2 border-foreground py-2 text-center font-mono text-xs font-bold uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
           <div className="mt-3 -mx-4 border-4 border-accent bg-asphalt px-5 py-8 text-center text-asphalt-foreground">
             <p className="font-mono text-xs uppercase tracking-widest text-accent">SADRE 2.0</p>
             <h1 className="mx-auto mt-2 max-w-5xl font-display text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
