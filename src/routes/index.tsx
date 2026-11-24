@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SimNotice } from "@/components/SiteShell";
 import { localStudyStatus } from "@/lib/local-study";
@@ -38,15 +39,40 @@ const modulos = [
   { to: "/estudo-local", t: "Estudo geotécnico e hidrológico", d: "Chuva, solo e alagamentos com fontes reais." },
 ] as const;
 
+const defaultTy = { locSize: 12, locWeight: 700, locTrack: 2, locGap: 6, titleSize: 48, titleWeight: 800, titleLine: 1.25, titleTrack: 0 };
+
 function Index() {
+  const [ty, setTy] = useState(defaultTy);
   return (
     <div className="space-y-12">
       <section className="grid gap-8">
         <div>
-          <p className="text-center font-mono text-xs font-bold uppercase tracking-widest text-primary">Fortaleza · Ceará · Brasil</p>
-          <div className="mt-3 -mx-4 border-4 border-accent bg-asphalt px-5 py-8 text-center text-asphalt-foreground">
+          <details className="mb-3 rounded border border-border bg-card p-3 text-sm">
+            <summary className="cursor-pointer font-mono text-xs font-bold uppercase">Ajustar texto do banner</summary>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {([
+                ["Local · tamanho (px)", "locSize", 10, 24, 1],
+                ["Local · peso", "locWeight", 400, 900, 100],
+                ["Local · espaço entre letras (px)", "locTrack", 0, 8, 0.5],
+                ["Local · distância do banner (px)", "locGap", 0, 40, 2],
+                ["Título · tamanho (px)", "titleSize", 20, 72, 1],
+                ["Título · peso", "titleWeight", 400, 900, 100],
+                ["Título · entrelinha", "titleLine", 0.9, 1.6, 0.05],
+                ["Título · espaço entre letras (px)", "titleTrack", -2, 6, 0.5],
+              ] as const).map(([label, key, min, max, step]) => (
+                <label key={key} className="grid gap-1">
+                  <span className="flex justify-between text-xs"><span>{label}</span><span className="font-mono">{ty[key]}</span></span>
+                  <input type="range" min={min} max={max} step={step} value={ty[key]}
+                    onChange={(e) => setTy({ ...ty, [key]: Number(e.target.value) })} />
+                </label>
+              ))}
+            </div>
+            <button type="button" className="mt-3 rounded border border-border px-3 py-1 text-xs" onClick={() => setTy(defaultTy)}>Restaurar padrão</button>
+          </details>
+          <p className="text-center font-mono uppercase text-foreground" style={{ fontSize: ty.locSize, fontWeight: ty.locWeight, letterSpacing: ty.locTrack }}>Fortaleza · Ceará · Brasil</p>
+          <div className="-mx-4 border-4 border-accent bg-asphalt px-5 py-8 text-center text-asphalt-foreground" style={{ marginTop: ty.locGap }}>
             <p className="font-mono text-xs uppercase tracking-widest text-accent">SADRE 2.0</p>
-            <h1 className="mx-auto mt-2 max-w-5xl font-display text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
+            <h1 className="mx-auto mt-2 max-w-5xl font-display" style={{ fontSize: `min(${ty.titleSize}px, 9vw)`, fontWeight: ty.titleWeight, lineHeight: ty.titleLine, letterSpacing: ty.titleTrack }}>
               Sistema Adaptativo de Drenagem, Reaproveitamento e Estabilização de Ruas
             </h1>
           </div>
