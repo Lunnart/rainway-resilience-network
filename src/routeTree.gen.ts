@@ -14,6 +14,7 @@ import { Route as EstudoLocalRouteImport } from './routes/estudo-local'
 import { Route as InfraestruturaRouteImport } from './routes/infraestrutura'
 import { Route as SimuladorChuvaRouteImport } from './routes/simulador-chuva'
 import { Route as TecnologiaRouteImport } from './routes/tecnologia'
+import { Route as TelemetriaRouteImport } from './routes/telemetria'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const TecnologiaRoute = TecnologiaRouteImport.update({
   path: '/tecnologia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TelemetriaRoute = TelemetriaRouteImport.update({
+  id: '/telemetria',
+  path: '/telemetria',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/infraestrutura': typeof InfraestruturaRoute
   '/simulador-chuva': typeof SimuladorChuvaRoute
   '/tecnologia': typeof TecnologiaRoute
+  '/telemetria': typeof TelemetriaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/infraestrutura': typeof InfraestruturaRoute
   '/simulador-chuva': typeof SimuladorChuvaRoute
   '/tecnologia': typeof TecnologiaRoute
+  '/telemetria': typeof TelemetriaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/infraestrutura': typeof InfraestruturaRoute
   '/simulador-chuva': typeof SimuladorChuvaRoute
   '/tecnologia': typeof TecnologiaRoute
+  '/telemetria': typeof TelemetriaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,6 +80,7 @@ export interface FileRouteTypes {
     | '/infraestrutura'
     | '/simulador-chuva'
     | '/tecnologia'
+    | '/telemetria'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -78,6 +88,7 @@ export interface FileRouteTypes {
     | '/infraestrutura'
     | '/simulador-chuva'
     | '/tecnologia'
+    | '/telemetria'
   id:
     | '__root__'
     | '/'
@@ -85,6 +96,7 @@ export interface FileRouteTypes {
     | '/infraestrutura'
     | '/simulador-chuva'
     | '/tecnologia'
+    | '/telemetria'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,6 +105,7 @@ export interface RootRouteChildren {
   InfraestruturaRoute: typeof InfraestruturaRoute
   SimuladorChuvaRoute: typeof SimuladorChuvaRoute
   TecnologiaRoute: typeof TecnologiaRoute
+  TelemetriaRoute: typeof TelemetriaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -132,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TecnologiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/telemetria': {
+      id: '/telemetria'
+      path: '/telemetria'
+      fullPath: '/telemetria'
+      preLoaderRoute: typeof TelemetriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -141,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   InfraestruturaRoute: InfraestruturaRoute,
   SimuladorChuvaRoute: SimuladorChuvaRoute,
   TecnologiaRoute: TecnologiaRoute,
+  TelemetriaRoute: TelemetriaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

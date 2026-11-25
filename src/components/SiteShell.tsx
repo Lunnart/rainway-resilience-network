@@ -6,6 +6,7 @@ const nav = [
   { to: "/tecnologia", label: "B · Tecnologia" },
   { to: "/simulador-chuva", label: "C · Águas pluviais" },
   { to: "/infraestrutura", label: "D · Infraestrutura" },
+  { to: "/telemetria", label: "E · Telemetria" },
   { to: "/estudo-local", label: "Estudo local" },
 ] as const;
 

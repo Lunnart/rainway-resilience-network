@@ -35,6 +35,7 @@ const modulos = [
   { to: "/tecnologia", t: "B · Funcionamento", d: "Camadas, materiais e limitações." },
   { to: "/simulador-chuva", t: "C · Simulador de águas pluviais", d: "Volume captável e excedente." },
   { to: "/infraestrutura", t: "D · Simulador de infraestrutura", d: "Modelos A, B e C de via." },
+  { to: "/telemetria", t: "E · IoT e telemetria", d: "Sensores, alertas e bypass (simulado)." },
   { to: "/estudo-local", t: "Estudo geotécnico e hidrológico", d: "Chuva, solo e alagamentos com fontes reais." },
 ] as const;
 
