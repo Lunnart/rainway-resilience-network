@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SimNotice } from "@/components/SiteShell";
 import { piciRainfall } from "@/lib/local-study";
+import {
+  alagamentosPorBairro,
+  bairrosNaTabela,
+  escalaRanking,
+  hidricas2012a2025,
+  hidricas2025,
+  somaTabelaBairros,
+  totalAlagamentosObservatorio,
+} from "@/lib/flood-ranking";
 
 export const Route = createFileRoute("/estudo-local")({
   head: () => ({
@@ -27,6 +36,10 @@ const fontes = {
   uece: { n: "Santos, Juliana Moreira dos — Alagamentos e inundações em Fortaleza-CE: uma análise diacrônica (dissertação, 2021; publicação no catálogo UECE, 2022)", u: "https://siduece.uece.br/siduece/trabalhoAcademicoPublico.jsf?id=105878" },
   maran: { n: "Almeida & Carvalho — Inundações na bacia do rio Maranguapinho (Rev. Bras. Geomorfologia, 2010)", u: "https://rbgeomorfologia.org.br/rbg/article/download/150/144/431" },
   pmf: { n: "Prefeitura de Fortaleza — Índice de Vulnerabilidade às Mudanças Climáticas e Plano de Adaptação", u: "https://urbanismoemeioambiente.fortaleza.ce.gov.br/images/urbanismo-e-meio-ambiente/forclima/indice_de_vulnerabilidade_as_mudancas_climaticas.pdf" },
+  obs: { n: "Prefeitura de Fortaleza / Ipplan — Observatório de Riscos Climáticos, Análise de ocorrências da Defesa Civil (2017–2026)", u: "https://observatorio.fortaleza.ce.gov.br/riscos-climaticos/analise-de-ocorrencias" },
+  obsAlag: { n: "Observatório de Riscos Climáticos — Análise de ocorrências filtrada por Tipologia = Alagamento (2017–2026)", u: "https://observatorio.fortaleza.ce.gov.br/riscos-climaticos/analise-de-ocorrencias?tipo%5B0%5D=1" },
+  dc2025: { n: "A Notícia do Ceará — Passaré e Centro lideram lista de riscos climáticos em 2025, diz Defesa Civil de Fortaleza (24/11/2025)", u: "https://anoticiadoceara.com.br/passare-e-centro-lideram-lista-de-riscos-climaticos-em-2025-diz-defesa-civil-de-fortaleza/" },
+  diario26: { n: "Diário do Nordeste — Entre riscos de desabamento e alagamentos, Fortaleza tem média de 200 ocorrências por mês (07/05/2026)", u: "https://diariodonordeste.verdesmares.com.br/ceara/entre-riscos-de-desabamento-e-alagamentos-fortaleza-tem-media-de-200-ocorrencias-por-mes-1.3759327" },
 } as const;
 type F = keyof typeof fontes;
 
@@ -148,6 +161,40 @@ function Estudo() {
           </Card>
         </div>
         <p className="text-xs text-muted-foreground">As 1.479 ocorrências foram catalogadas a partir de jornais: não são um cadastro completo da Defesa Civil, um total de eventos meteorológicos independentes ou um ranking atualizado de bairros.</p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold">3.1 Bairros que mais sofrem no período chuvoso</h2>
+        <p className="text-sm text-muted-foreground">O Observatório de Riscos Climáticos de Fortaleza publica o histórico de chamados da Defesa Civil. Filtrando a tipologia <b>Alagamento</b> no período 2017–2026, os bairros abaixo concentram o maior número de registros.<Cite f={["obs", "obsAlag"]} /></p>
+        <div className="overflow-x-auto rounded border border-border">
+          <table className="w-full min-w-[560px] text-left text-sm">
+            <caption className="p-3 text-left font-semibold">Chamados por alagamento · 2017–2026</caption>
+            <thead className="bg-muted"><tr><th className="p-3">#</th><th className="p-3">Bairro</th><th className="p-3">Chamados</th><th className="p-3">Participação relativa</th></tr></thead>
+            <tbody>
+              {alagamentosPorBairro.map((b, i) => (
+                <tr key={b.nome} className="border-t border-border">
+                  <td className="p-3 font-mono text-xs text-muted-foreground">{i + 1}</td>
+                  <th className="p-3 font-semibold">{b.nome}</th>
+                  <td className="p-3 font-mono">{b.chamados}</td>
+                  <td className="p-3"><div className="h-2 w-full min-w-[120px] rounded bg-muted"><div className="h-2 rounded bg-primary" style={{ width: `${escalaRanking(b.chamados)}%` }} /></div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-xs text-muted-foreground">A página informa {totalAlagamentosObservatorio.toLocaleString("pt-BR")} chamados para a tipologia no período; a tabela por bairro soma {somaTabelaBairros.toLocaleString("pt-BR")} em {bairrosNaTabela} bairros — os {totalAlagamentosObservatorio - somaTabelaBairros} restantes não têm bairro atribuído na fonte. Chamado é solicitação registrada na Defesa Civil, não área alagada medida: depende de quem aciona o órgão e da classificação dada ao caso.<Cite f={["obsAlag"]} /></p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card t="Série mais longa · 2012 a julho de 2025">
+            <p>Nas ocorrências hidrológicas (alagamento, inundação, deslizamento e riscos associados), o Barroso acumulou 217 chamados, seguido por Jangurussu, Genibaú, Quintino Cunha e Passaré.<Cite f={["dc2025"]} /></p>
+            <ul className="font-mono text-xs">{hidricas2012a2025.map((b) => <li key={b.nome}>{b.nome}: {b.chamados}</li>)}</ul>
+          </Card>
+          <Card t="Só 2025, até julho">
+            <p>A capital somou {hidricas2025.total} ocorrências hidrológicas, distribuídas principalmente entre os bairros abaixo.<Cite f={["dc2025"]} /></p>
+            <ul className="font-mono text-xs">{hidricas2025.top.map((b) => <li key={b.nome}>{b.nome}: {b.chamados}</li>)}</ul>
+          </Card>
+        </div>
+        <p className="text-sm text-muted-foreground">Os chamados se concentram entre fevereiro e abril, a quadra chuvosa cearense. Em 2026 a média foi de 206 ocorrências por mês no primeiro quadrimestre, e abril registrou 499 mm em Fortaleza, 36% acima da média histórica de 365,1 mm citada na reportagem — referência diferente da normal INMET de 385 mm para abril usada acima.<Cite f={["diario26"]} /></p>
+        <SimNotice>Ranking de registros da Defesa Civil, não medição de campo do SADRE. Nenhum desses bairros foi vistoriado pelo projeto: a escolha do trecho-piloto continua sujeita ao plano de investigação da seção 5.</SimNotice>
       </section>
 
       <section className="space-y-3">

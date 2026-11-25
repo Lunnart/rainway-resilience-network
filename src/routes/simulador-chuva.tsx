@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SimNotice } from "@/components/SiteShell";
 import { calcRain } from "@/lib/hydro";
-import { chuvas, bairros } from "@/lib/fortaleza";
+import { chuvas, bairrosCriticos } from "@/lib/fortaleza";
 
 export const Route = createFileRoute("/simulador-chuva")({
   head: () => ({
@@ -40,7 +40,7 @@ function Sim() {
   const [bairro, setBairro] = useState<string | null>(null);
   const r = calcRain({ areaM2: area, precipitacaoMm: mm, coeficiente: Math.min(c, 1), eficiencia: Math.min(ef, 100) / 100, reservatorioL: res });
   const pct = Math.min(100, r.ocupacao * 100);
-  const b = bairros.find((x) => x.id === bairro);
+  const b = bairrosCriticos.find((x) => x.id === bairro);
   const comp = chuvas.map((ch) => ({ ch, r: calcRain({ areaM2: area, precipitacaoMm: ch.mm, coeficiente: Math.min(c, 1), eficiencia: Math.min(ef, 100) / 100, reservatorioL: res }) }));
   return (
     <div className="space-y-8">
@@ -64,19 +64,23 @@ function Sim() {
           <p className="mt-1 text-xs text-muted-foreground">{chuvas.find((ch) => ch.mm === mm)?.nota ?? "Valor personalizado."}</p>
         </div>
         <div>
-          <p className="mb-2 font-mono text-xs uppercase text-muted-foreground">2 · Bairro com histórico de alagamento</p>
+          <p className="mb-2 font-mono text-xs uppercase text-muted-foreground">2 · Bairros que mais sofrem no período chuvoso</p>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {bairros.map((b) => (
+            {bairrosCriticos.map((b) => (
               <button key={b.id} type="button" onClick={() => { setBairro(b.id); setArea(b.areaM2); setC(b.c); }}
                 className={`rounded border p-3 text-left text-sm ${bairro === b.id ? "border-primary bg-secondary" : "border-border hover:border-primary"}`}>
-                <span className="block font-semibold">{b.nome}</span>
+                <span className="flex items-center justify-between gap-2">
+                  <span className="block font-semibold">{b.nome}</span>
+                  <span className="rounded bg-muted px-1.5 py-0.5 font-mono text-[10px]">{b.chamados} chamados</span>
+                </span>
                 <span className="block text-xs text-muted-foreground">{b.via}</span>
                 <span className="font-mono text-xs">{b.areaM2.toLocaleString("pt-BR")} m² · C {b.c} · Modelo {b.modelo}</span>
               </button>
             ))}
           </div>
+          <p className="mt-1 text-xs text-muted-foreground">A contagem de chamados é da Defesa Civil de Fortaleza (Observatório de Riscos Climáticos, tipologia Alagamento, 2017–2026); via, área, C e modelo sugerido são hipóteses ilustrativas da equipe SADRE.</p>
         </div>
-        <SimNotice>Cenários ilustrativos. Alturas de chuva e trechos são aproximações para estudo; confirme com dados da FUNCEME e da Defesa Civil de Fortaleza.</SimNotice>
+        <SimNotice>Cenários ilustrativos. Alturas de chuva e trechos são aproximações para estudo; confirme com dados da FUNCEME e da Defesa Civil de Fortaleza. <Link to="/estudo-local" className="underline">Ver fontes do ranking</Link>.</SimNotice>
       </section>
       <div className="grid gap-6 md:grid-cols-[1fr_1.3fr]">
         <div className="space-y-4 rounded border border-border bg-card p-6">

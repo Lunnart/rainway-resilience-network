@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SimNotice } from "@/components/SiteShell";
-import { bairros } from "@/lib/fortaleza";
+import { bairrosCriticos } from "@/lib/fortaleza";
 import { avaliar, LIMITES, simular, type Leitura } from "@/lib/telemetry";
 
 export const Route = createFileRoute("/telemetria")({
@@ -18,12 +18,18 @@ export const Route = createFileRoute("/telemetria")({
   component: Telemetria,
 });
 
+// Leituras de partida SIMULADAS — não há sensores instalados em nenhum destes bairros.
 const bases: Record<string, Leitura> = {
-  aldeota: { nivelPct: 25, saturacaoPct: 30, turbidezNTU: 2 },
-  parangaba: { nivelPct: 45, saturacaoPct: 50, turbidezNTU: 3.5 },
-  montese: { nivelPct: 30, saturacaoPct: 35, turbidezNTU: 2.5 },
-  messejana: { nivelPct: 20, saturacaoPct: 40, turbidezNTU: 1.8 },
-  barra: { nivelPct: 50, saturacaoPct: 55, turbidezNTU: 4 },
+  barroso: { nivelPct: 50, saturacaoPct: 55, turbidezNTU: 4 },
+  jangurussu: { nivelPct: 45, saturacaoPct: 50, turbidezNTU: 3.5 },
+  passare: { nivelPct: 40, saturacaoPct: 45, turbidezNTU: 3 },
+  "conjunto-palmeiras": { nivelPct: 35, saturacaoPct: 40, turbidezNTU: 2.5 },
+  "quintino-cunha": { nivelPct: 30, saturacaoPct: 35, turbidezNTU: 2.8 },
+  mondubim: { nivelPct: 25, saturacaoPct: 38, turbidezNTU: 2.2 },
+  centro: { nivelPct: 20, saturacaoPct: 30, turbidezNTU: 1.8 },
+  "vila-velha": { nivelPct: 38, saturacaoPct: 42, turbidezNTU: 3.2 },
+  genibau: { nivelPct: 33, saturacaoPct: 36, turbidezNTU: 2.6 },
+  "edson-queiroz": { nivelPct: 22, saturacaoPct: 34, turbidezNTU: 2 },
 };
 
 const sensores = [
@@ -40,7 +46,7 @@ const rotulo = { normal: "Normal", atencao: "Atenção", alerta: "Alerta" };
 
 function Telemetria() {
   const [chuva, setChuva] = useState(0);
-  const pontos = bairros.map((b) => {
+  const pontos = bairrosCriticos.map((b) => {
     const l = simular(bases[b.id] ?? { nivelPct: 0, saturacaoPct: 0, turbidezNTU: 0 }, chuva);
     return { b, l, r: avaliar(l) };
   });
@@ -52,7 +58,7 @@ function Telemetria() {
         <p className="font-mono text-xs uppercase text-primary">Módulo E</p>
         <h1 className="text-3xl font-extrabold">IoT, sensores e telemetria</h1>
         <p className="max-w-3xl text-muted-foreground">O que torna o SADRE <strong>adaptativo</strong>: sensores informam nível, saturação e qualidade da água, e o sistema decide quando reter, liberar para reúso ou desviar para a drenagem pública.</p>
-        <SimNotice>Painel demonstrativo. Leituras simuladas e limiares ilustrativos — não há sensores instalados nem dados medidos.</SimNotice>
+        <SimNotice>Painel demonstrativo. Os pontos monitorados são os bairros com mais chamados por alagamento na série da Defesa Civil de Fortaleza; as leituras e os limiares são simulados — não há sensores instalados nem dados medidos.</SimNotice>
       </header>
 
       <section className="space-y-3 rounded border border-border bg-card p-5">
@@ -69,6 +75,7 @@ function Telemetria() {
               <span className={`rounded px-2 py-0.5 font-mono text-[10px] font-semibold uppercase ${cor[r.estado]}`}>{rotulo[r.estado]}</span>
             </div>
             <p className="text-xs text-muted-foreground">{b.via} · Modelo {b.modelo}</p>
+            <p className="font-mono text-[10px] uppercase text-primary">Prioridade {b.prioridade} · {b.chamados} chamados por alagamento (2017–2026)</p>
             <Barra nome="Nível do reservatório" v={l.nivelPct} />
             <Barra nome="Saturação do subleito" v={l.saturacaoPct} />
             <p className="font-mono text-xs">Turbidez: {l.turbidezNTU} NTU</p>
